@@ -12,5 +12,7 @@
 #saída: a saída é a o resultado da operação, escrito soma =
 
 A = int(input(""))
+#recebe um valor
 B = int(input(""))
 print(f"SOMA = {A+B}")
+#dá o valor da soma das variaveis A e B

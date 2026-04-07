@@ -12,5 +12,8 @@
 #saída: a saída é a o resultado da operação
 
 A = int(input(""))
+#recebe o valor dado de entrada por int e input
 B = int(input(""))
+
 print(f"X = {A+B}")
+#dá o valor da soma das variaveis A e B
