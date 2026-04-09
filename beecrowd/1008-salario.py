@@ -7,9 +7,9 @@ Data; 2026.04.09
 #Objetivo Calcular o sálario de um funcionario com as horas e sálario por hora e registrar seu número.
 
 # Analise LIAC
-#entrada:
-#Processamento:
-#saída:
+#entrada:a entrada é o numero do funcionario, as horas trabalhadas e o salario por hora
+#Processamento:Faz as horas trabalhadas x salario por horas
+#saída:Mostra o número do funcionario e o calculo do sálario já pronto
 
 N = int(input(""))
 #Pega o número do funcionario
