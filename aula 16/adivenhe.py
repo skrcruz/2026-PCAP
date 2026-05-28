@@ -6,16 +6,26 @@
 
 import random
 
-#sorteamos um número aleatório entre 1 e 10
+#preparamos um jogo
 numero_secreto = random.randint(1, 10)
+chances = 3
+acertou = False
 
-#pedimos um palpite
-palpite = int(input("Digite um número de 1 a 10:"))
+#repetimos em quanto houver chances e não tiver acertado
+while chances > 0 and not acertou:
+    palpite = int(input("Digite um número de 1 a 10:"))
 
-#comparamos o palpite com o número secreto
-if palpite == numero_secreto:
-    print("Acertou! O número era", numero_secreto)
-elif palpite < numero_secreto:
-    print("Muito baixo! Tente um número maior.")
-else:
-    print("Muito alto! Tente um número menos.")
+    if palpite == numero_secreto:
+        print("Acertou!")
+        acertou = True
+    elif palpite < numero_secreto:
+        print("Muito baixo!")
+    else:
+        print("Muito alto!")
+
+    chances = chances - 1 #gasta uma chance
+    print("Chances restantes:", chances)
+
+#quando o laço termina vemos o que aconteceu
+if not acertou:
+    print("Suas chances acabaram! O número era", numero_secreto)
