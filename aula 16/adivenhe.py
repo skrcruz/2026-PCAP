@@ -24,7 +24,7 @@ def jogar(maximo, chances):
         chances = chances - 1
         print("Chances restantes:", chances)
 
-    return acertou
+    return acertou, numero_secreto
 
 #niveis guardados em uma lista de listas
 niveis = [
@@ -45,7 +45,8 @@ nivel = niveis[opcao - 1]
 
 #iniciamos o jogo com a configuração do jogo escolhido
 print("Você escolheu o nível:", nivel[0])
-venceu = jogar(nivel[1], nivel[2])
+venceu, numero_correto = jogar(nivel[1], nivel[2])
 
 if not venceu:
     print("Fim de jogo! Tente um nível mais fácil.")
+    print("o número era:", numero_correto )
