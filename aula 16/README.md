@@ -22,4 +22,4 @@ repetição foi o return para voltar se ainda tivesse chances
 
 condição foi o if, elif e else para ver se o jogador acertou
 
-sub rotina foi usado para 
+sub rotina foi usado para continuar jogando caso ainda tenha chances com o while
