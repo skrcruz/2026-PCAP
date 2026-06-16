@@ -6,15 +6,14 @@
 
 import random
 
-# 1) as três jogadas possíveis, guaradadas como texto(strings) numa lista
 opcoes = ["pedra", "papel", "tesoura"]
-
-# 2) O computador sorteia uma jogada de dentro da lista
 jogada_maquinha = random.choice(opcoes)
 
-# 3) Pedimos a jogada do jogador
-jogada_jogador = input("Sua jogada (pedra, papel ou tesoura): ")
+entrada = input("Sua jogada (pedra, papel ou tesoura): ")
+jogada_jogador = entrada.lower().strip()
 
-# 4) Mostramos as duas jogadas deste primeiro teste
-print("Você jogou:", jogada_jogador)
-print("A máquina jogou:", jogada_maquinha)
+if jogada_jogador not in opcoes:
+    print("Jogada inválida! Digite pedra, papel ou tesoura.")
+else:
+    print("Você jogou:", jogada_jogador)
+    print("A máquina jogou:", jogada_maquinha)
