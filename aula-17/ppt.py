@@ -6,14 +6,45 @@
 
 import random
 
+def resultado(jogador, maquina):
+    if jogador == maquina:
+        return "empate"
+    if jogador == "pedra" and maquina == "tesoura":
+        return "jogador"
+    if jogador == "papel" and maquina == "pedra":
+        return "jogador"
+    if jogador == "tesoura" and maquina == "papel":
+        return "jogador"
+    return "maquina"
+
+
 opcoes = ["pedra", "papel", "tesoura"]
-jogada_maquinha = random.choice(opcoes)
+pontos_jogador = 0
+pontos_maquina = 0
 
-entrada = input("Sua jogada (pedra, papel ou tesoura): ")
-jogada_jogador = entrada.lower().strip()
+for rodada in range(1, 6):
+    print("--- Rodada", rodada, "---")
+    jogada_maquina = random.choice(opcoes)
+    jogada_jogador = input("Sua jogada: ").lower().strip()
 
-if jogada_jogador not in opcoes:
-    print("Jogada inválida! Digite pedra, papel ou tesoura.")
-else:
-    print("Você jogou:", jogada_jogador)
-    print("A máquina jogou:", jogada_maquinha)
+    if jogada_jogador not in opcoes:
+        print("Inválida! Você perde a rodada.")
+        pontos_maquina = pontos_maquina + 1
+    else:
+        quem = resultado(jogada_jogador, jogada_maquina)
+        if quem == "empate":
+            print("Empate!")
+        elif quem == "jogador":
+            print("Você ganhou a rodada!")
+            pontos_jogador = pontos_jogador + 1
+        else:
+            print("A máquina ganhou a rodada!")
+            pontos_maquina = pontos_maquina + 1
+    if pontos_maquina == 3:
+        print("A máquina ganhou!")
+        break
+    if pontos_jogador == 3:
+        print("O jogador ganhou!")
+        break
+
+print("Placar final -> Você:", pontos_jogador, "Máquina:", pontos_maquina)
