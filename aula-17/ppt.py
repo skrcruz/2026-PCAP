@@ -15,10 +15,24 @@ def resultado(jogador, maquina):
         return "jogador"
     if jogador == "tesoura" and maquina == "papel":
         return "jogador"
+    if jogador == "tesoura" and maquina == "lagarto":
+        return "jogador"
+    if jogador == "papel" and maquina == "spock":
+        return "jogador"
+    if jogador == "pedra" and maquina == "spock":
+        return "jogador"
+    if jogador == "lagarto" and maquina == "papel":
+        return "jogador"
+    if jogador == "lagarto" and maquina == "spock":
+        return "jogador"
+    if jogador == "spock" and maquina == "tesoura":
+        return "jogador"
+    if jogador == "spock" and maquina == "pedra":
+        return "jogador"
     return "maquina"
 
 
-opcoes = ["pedra", "papel", "tesoura"]
+opcoes = ["pedra", "papel", "tesoura", "lagarto", "spock"]
 pontos_jogador = 0
 pontos_maquina = 0
 
