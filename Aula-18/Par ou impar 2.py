@@ -43,8 +43,15 @@ for rodada in range(1,6):
 
     if (jogada_jogador + jogada_maquina) % 2 == 0:
         print("par")
-        
+        if aposta == "par":
+            pontos_jogador = pontos_jogador + 1
+        else:
+            pontos_maquina = pontos_maquina + 1
     else:
         print("ímpar")
+        if aposta == "impar":
+            pontos_jogador = pontos_jogador + 1
+        else:
+            pontos_maquina = pontos_maquina + 1
 
 print("Placar -> Você:", pontos_jogador, "Máquina:", pontos_maquina)
