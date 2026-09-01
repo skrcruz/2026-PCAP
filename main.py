@@ -2,9 +2,9 @@
 # ARQUIVO    : main.py  (pasta fliperama)
 # Disciplina : Pensamento Computacional, Algoritmos e Programacao
 #              (2026-PCAP)
-# Aula       : 20
+# Aula       : 20 
 # Autor      : [Samuel Ribeiro da Cruz]
-# Data       : 2026.08.04
+# Data:      : 2026.08.04
 # Conceitos  : <o que este arquivo usa>
 # ==============================================================
 
@@ -15,94 +15,53 @@ from ppt import jogar_ppt
 from parimpar import jogar_parouimpar
 from modulos import ler_opcao
 from placar import salvar_placar, carregar_placar
-from jogadores import (
-    menu_jogadores,
-    salvar_jogadores,
-    carregar_jogadores,
-    buscar
-)
+from jogadores import menu_jogadores, salvar_jogadores, carregar_jogadores, buscar
 from meujogo import jogar_meujogo
 
 NOME_DO_DONO = 'Samuel'
 OPCOES = ['0', '1', '2', '3', '4', '5']
 
-NOMES_DOS_JOGOS = [
-    'adivinhe o Numero',
-    'Pedra-Papel-Tesoura',
-    'Par ou Impar',
-    'Vidente'
-]
-
+NOMES_DOS_JOGOS = ['adivinhe o Numero', 'Pedra-Papel-Tesoura', 'Par ou Impar', 'Vidente']
 vezes_jogado = carregar_placar()
 jogadores = carregar_jogadores()
 
-
 def mostrar_placar():
-    '''Mostra quantas vezes cada jogo foi jogado.'''
     titulo('placar')
-
     for i in range(4):
         print(NOMES_DOS_JOGOS[i] + ': ' + str(vezes_jogado[i]) + 'x')
 
-
 while True:
     titulo('FLIPERAMA DO ' + NOME_DO_DONO)
-
     print('1 - Jogo Adivinhe o Número')
     print('2 - Pedra-Papel-Tesoura')
     print('3 - Par ou Impar')
     print('4 - Vidente')
     print('5 - Jogadores')
     print('0 - Sair do Fliperama')
-
     linha()
-
     opcao = ler_opcao('escolha uma opção: ', OPCOES)
 
     if opcao == '0':
         mostrar_placar()
         salvar_placar(vezes_jogado)
         salvar_jogadores(jogadores)
-
         print('Até a próxima!')
         break
 
-    if opcao == '5':
+    if opcao =='5':
         menu_jogadores(jogadores)
-
     else:
-        # Pergunta quem vai jogar antes de abrir qualquer jogo
-        apelido = input('Quem vai jogar? ').strip().lower()
-
-        # Procura o jogador no cadastro
-        indice_jogador = buscar(jogadores, apelido)
-
-        # Se encontrou, soma uma partida
-        if indice_jogador != -1:
-            jogadores[indice_jogador][2] = str(
-                int(jogadores[indice_jogador][2]) + 1
-            )
-            print('Boa sorte, ' + jogadores[indice_jogador][1] + '!')
-        else:
-            print('Jogador não cadastrado. A partida não será contabilizada.')
-
-        # Conta o jogo no placar
         indice = int(opcao) - 1
         vezes_jogado[indice] = vezes_jogado[indice] + 1
 
-        # Abre o jogo escolhido
         if opcao == '1':
             jogar_adivinhe()
-
         elif opcao == '2':
             jogar_ppt()
-
-        elif opcao == '3':
+        elif opcao =='3':
             jogar_parouimpar()
-
-        elif opcao == '4':
+        elif opcao =='4':
             jogar_meujogo()
-
         else:
             print('Opção inválida! Tente novamente.')
 

@@ -5,7 +5,7 @@
 # Aula       : 20 
 # Autor      : [Samuel Ribeiro da Cruz]
 # Data:      : 2026.08.04
-# Conceitos  : <o que este arquivo usa>
+# Conceitos  : reaproveitamento, validação, função que chama função
 # ==============================================================
 
 
@@ -21,3 +21,11 @@ def ler_numero(mensagem, minimo, maximo):
     for n in range(minimo, maximo + 1):
         numeros.append(str(n))
     return int(ler_opcao(mensagem, numeros))
+
+
+def ler_texto(mensagem):
+    resposta = input(mensagem + ': ').strip()
+    while resposta == '':
+        print('Não pode ficar em branco! tente de novo.')
+        resposta = input(mensagem + ': ').strip()
+    return resposta

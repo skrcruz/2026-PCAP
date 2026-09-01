@@ -49,17 +49,17 @@ def cadastrar(jogadores):
 
 
 def listar(jogadores):
-    '''Lista os jogadores cadastrados em ordem de partidas.'''
     titulo('top 10 jogadores')
 
     if len(jogadores) == 0:
         print('Nenhum jogador cadastrado ainda.')
     else:
-        ranking = sorted(jogadores, key=lambda j: int(j[2]), reverse=True)
+        ranking = sorted (jogadores, key=lambda j: int(j[2]), reverse=True)
 
-        for i in range(len(ranking[:10])):
-            print(str(i + 1).rjust(2) + '.' + ranking[i][0].ljust(6) + ' | ' +
-                  ranking[i][1].ljust(18) + ' | ' + ranking[i][2].rjust(3) + ' partidas')
+    for i in range(len(ranking[:10])):
+        print(str(i + 1).rjust(2) + '.' + ranking[i][0].ljust(6) + ' | ' +
+              ranking[i][1].ljust(18) + ' | ' + ranking[i][2].rjust(3) + ' partidas')
+
 
     linha()
 
@@ -83,7 +83,6 @@ def buscar(jogadores, apelido):
 
 
 def alterar(jogadores):
-    '''Altera o nome de um jogador cadastrado.'''
     listar(jogadores)
 
     apelido = input('Apelido de quem vai mudar de nome: ').strip().lower()
@@ -94,7 +93,7 @@ def alterar(jogadores):
     else:
         print('nome atual: ' + jogadores[i][1])
         jogadores[i][1] = ler_texto('Nome novo: ')
-        print('Pronto. Agora e ' + jogadores[i][1] + '.')
+        print('Pronto. Agora e ' +  jogadores[i][1] + '.')
 
     linha()
 
@@ -130,7 +129,6 @@ def excluir(jogadores):
 
 
 def salvar_jogadores(jogadores):
-    '''Salva os jogadores cadastrados no arquivo CSV.'''
     arquivo = open(ARQUIVO, 'w')
 
     for jogador in jogadores:
@@ -140,25 +138,22 @@ def salvar_jogadores(jogadores):
 
 
 def carregar_jogadores():
-    '''Carrega os jogadores salvos no arquivo CSV.'''
     if not exists(ARQUIVO):
         return []
-
+    
     arquivo = open(ARQUIVO, 'r')
     linhas = arquivo.readlines()
     arquivo.close()
 
     lidos = []
-
     for linha_lida in linhas:
         campos = linha_lida.strip().split(',')
-        lidos.append(campos)
+        lidos.append(campos) 
 
-    return lidos
+    return lidos     
 
 
 def menu_jogadores(jogadores):
-    '''Exibe o menu para cadastrar e gerenciar jogadores.'''
     while True:
         titulo('CADASTRO DE JOGADORES')
         print('[1] Cadastrar jogador')

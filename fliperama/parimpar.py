@@ -1,5 +1,15 @@
 import random
+
+#
+# Arquivo   : parimpar.py
+# autor     : Samuel Ribeiro da Cruz
+# Data      : 26.08.26
+# conceitos :
+#
+from telas import titulo
+
 def jogar_parouimpar():
+    titulo('PAR OU IMPAR')
     jogada_maquina = random.randint(1, 5)
     #registra a jogada do jogador
     jogada_jogador = 0
