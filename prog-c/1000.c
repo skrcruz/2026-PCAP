@@ -10,3 +10,10 @@ int main(){
     printf("Hello World!\n");
     return 0;
 }
+
+/*
+ir para o diretório da raiz;
+git ad prog-c
+git commit -m "Hello-C"
+git push
+*/
