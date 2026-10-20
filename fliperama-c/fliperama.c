@@ -14,6 +14,7 @@
 #define DONO "Samuel"
 #define CAPACIDADE 50
 #define TAM_APELIDO 20
+#define ARQUIVO "jogadores.txt"
 
 void linha() {
     printf("================================================\n");
@@ -31,6 +32,10 @@ int ler_numero(char mensagem[], int minimo, int maximo) {
     printf("%s: ", mensagem);
     lidos = scanf("%d", &numero);
     while (lidos != 1 || numero < minimo || numero > maximo) {
+        if (lidos == EOF) {
+            printf("\nEntrada encerrada.\n");
+            exit(0);
+        }
         if (lidos != 1) {
             scanf("%*s"); /* elimina o que não é numero*/
         }
@@ -41,8 +46,13 @@ int ler_numero(char mensagem[], int minimo, int maximo) {
 }
 
 void ler_texto(char mensagem[], char destino[]) {
+    int c;
+
     printf("%s: ", mensagem);
     scanf("%19s", destino);   /* uma palavra, no maximo 19 letras */
+
+    /* descarta o resto da linha para nao sobrar lixo no buffer */
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 int buscar(char apelidos[][TAM_APELIDO], int qtd, char procurado[]) {
@@ -60,6 +70,12 @@ int cadastrar(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
     char novo[TAM_APELIDO];
 
     titulo("NOVO JOGADOR");
+
+    if (qtd >= CAPACIDADE) {
+        printf("Capacidade maxima atingida.\n");
+        return qtd;
+    }
+
     ler_texto("Apelido (sem espacos)", novo);
 
     if (buscar(apelidos, qtd, novo) != -1) {
@@ -115,13 +131,41 @@ void jogar_adivinhe(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
     printf("Acertou em %d tentativas, %s!\n", tentativas, quem);
 }
 
+void salvar(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
+    FILE *arquivo = fopen(ARQUIVO, "w");
+    int i;
+
+    if (arquivo == NULL) {
+        printf("Erro ao salvar o arquivo.\n");
+        return;
+    }
+    for (i = 0; i < qtd; i++) {
+        fprintf(arquivo, "%s,%d\n", apelidos[i], partidas[i]);
+    }
+    fclose(arquivo);
+}
+
+int carregar(char apelidos[][TAM_APELIDO], int partidas[]) {
+    FILE *arquivo = fopen(ARQUIVO, "r");
+    int qtd = 0;
+
+    if (arquivo == NULL) {
+        return 0;
+    }
+    while (qtd < CAPACIDADE && fscanf(arquivo, "%19[^,],%d\n", apelidos[qtd], &partidas[qtd]) == 2) {
+        qtd = qtd + 1;
+    }
+    fclose(arquivo);
+    return qtd;
+}
+
 void mostrar_menu() {
     linha();
     printf("   FLIPERAMA DO %s\n", DONO);
     linha();
     printf("[1] Adivinhe o Numero\n");
     printf("[2] Cadastrar jogador\n");
-    printf("[3] Listar jogaores\n");
+    printf("[3] Listar jogadores\n");
     printf("[0] Sair\n");
     linha();
 }
@@ -132,11 +176,11 @@ int main() {
     int qtd, opcao;
 
     srand(time(NULL));
-    qtd = 0;
+    qtd = carregar(apelidos, partidas);
 
     mostrar_menu();
     opcao = ler_numero("Sua escolha", 0, 3);
-    while (opcao!= 0) {
+    while (opcao != 0) {
         if (opcao == 1) {
             jogar_adivinhe(apelidos, partidas, qtd);
         } else if (opcao == 2) {
@@ -148,6 +192,7 @@ int main() {
         opcao = ler_numero("Sua escolha", 0, 3);
     }
 
+    salvar(apelidos, partidas, qtd);
     titulo("Ate a proxima!");
     return 0;
 }
