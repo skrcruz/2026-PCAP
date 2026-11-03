@@ -1,8 +1,8 @@
 /*
 Disciplina  : 2026-PCAP
-Problema    : beecrowd 2059 - Par ou Impar?
+Problema    : beecrowd 2059 - Impar, Par ou Roubo
 Autor       : Samuel Ribeiro da Cruz
-LIAC        : Le P, J1, J2, R e A. Se o Jogador 1 pediu para dobrar e o Jogador 2 recusou, o Jogador 1 ganha. Caso contrario, a paridade de J1 + J2 decide o vencedor conforme a escolha de P.
+LIAC        : Le p, j1, j2, r e a. Se houve roubo ou acusacao, aplica as regras de roubo; caso contrario a paridade de j1 + j2 decide o vencedor conforme a escolha de p. Imprime "Jogador 1 ganha!" ou "Jogador 2 ganha!".
 
 */
 #include <iostream>
@@ -13,7 +13,9 @@ int main() {
 
     cin >> p >> j1 >> j2 >> r >> a;
 
-    if (r == 1 && a == 0) {
+    if (r == 1 && a == 1) {
+        cout << "Jogador 2 ganha!" << endl;
+    } else if (r == 1 || a == 1) {
         cout << "Jogador 1 ganha!" << endl;
     } else if (((j1 + j2) % 2 == 0) == (p == 1)) {
         cout << "Jogador 1 ganha!" << endl;
