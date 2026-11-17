@@ -8,12 +8,13 @@
  */
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 #define DONO "Samuel Ribeiro da Cruz"
 
 void linha() {
-    cout << "=====================================" << endl;
+    cout << "========================================" << endl;
 }
 
 void titulo(string texto) {
@@ -29,13 +30,44 @@ int ler_numero(string mensagem, int minimo, int maximo) {
     cin >> numero;
     while (cin.fail() || numero < minimo || numero > maximo) {
         if (cin.fail()) {
-            cin.clear();                    // destrava o cin, que parou no que nao entendeu
-            cin.ignore(1000, '\n');         // e joga fora o resto da linha
+            cin.clear();             // destrava o cin
+            cin.ignore(1000, '\n');  // joga fora o resto da linha
         }
         cout << "Opcao invalida! Tente de novo: ";
         cin >> numero;
     }
     return numero;
+}
+
+string ler_texto(string mensagem) {
+    string texto;
+
+    cout << mensagem << ": ";
+    cin >> texto;   // uma palavra, sem espacos
+    return texto;
+}
+
+void cadastrar(vector<string> &apelidos, vector<int> &partidas) {
+    string novo;
+
+    titulo("NOVO JOGADOR");
+    novo = ler_texto("Apelido (sem espacos)");
+
+    apelidos.push_back(novo);
+    partidas.push_back(0);
+    cout << "Jogador " << novo << " cadastrado." << endl;
+}
+
+void listar(vector<string> &apelidos, vector<int> &partidas) {
+    int i, qtd = apelidos.size();
+
+    titulo("JOGADORES CADASTRADOS");
+    if (qtd == 0) {
+        cout << "Nenhum jogador cadastrado ainda." << endl;
+    }
+    for (i = 0; i < qtd; i++) {
+        cout << apelidos[i] << " | " << partidas[i] << " partidas" << endl;
+    }
 }
 
 void mostrar_menu() {
@@ -50,6 +82,8 @@ void mostrar_menu() {
 }
 
 int main() {
+    vector<string> apelidos;
+    vector<int> partidas;
     int opcao;
 
     mostrar_menu();
@@ -58,9 +92,9 @@ int main() {
         if (opcao == 1) {
             cout << "O jogo entra na Fase 3." << endl;
         } else if (opcao == 2) {
-            cout << "O cadastro entra na Fase 2." << endl;
+            cadastrar(apelidos, partidas);
         } else {
-            cout << "A lista entra na Fase 2." << endl;
+            listar(apelidos, partidas);
         }
         mostrar_menu();
         opcao = ler_numero("Sua escolha", 0, 3);
